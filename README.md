@@ -28,7 +28,7 @@ This Project is created to serve as a connector between Azure Translate and a Cl
       <th align=center > <img src="https://img.shields.io/badge/-Murtadha Marzouq-red" href="findasnake.com" width="100%"/></th>
       <th align=center><img src="https://img.shields.io/badge/-Ryan Hull-orange" width="75%"/></th>
       <th align=center><img src="https://img.shields.io/badge/-Scarlett Dong-yellow" width="75%"/>  </th>
-      <th align=center><img src="https://img.shields.io/badge/-Zhi Wong -green" width="75%"/> </th>
+      <th align=center><img src="https://img.shields.io/badge/-Zhi Wang -green" width="75%"/> </th>
     </tr>
   </thead>
   <tbody >
