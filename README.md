@@ -29,7 +29,12 @@ This Project is created to serve as a connector between Azure Translate and a Cl
       <th align=center><img src="https://img.shields.io/badge/-Ryan Hull-orange" width="75%"/></th>
       <th align=center><img src="https://img.shields.io/badge/-Scarlett Dong-yellow" width="75%"/>  </th>
       <th align=center><img src="https://img.shields.io/badge/-Zhi Wang -green" width="75%"/> </th>
+    <th align=center><img src="https://img.shields.io/badge/-Mohammed Arif -blue" width="75%"/> </th>
+    </tr>  
     </tr>
+
+    
+
   </thead>
   <tbody >
     <tr>
@@ -45,7 +50,7 @@ This Project is created to serve as a connector between Azure Translate and a Cl
       </td>
       <td>
         <a href="">
-          <img src="./Scarlett.jpg" alt="Param" width="384"/>
+          <img src="./Scarlett.jpg" alt="Scarlett" width="384"/>
         </a>
       </td>
       <td>
@@ -53,7 +58,11 @@ This Project is created to serve as a connector between Azure Translate and a Cl
           <img src="./Zhi.jpg" alt="Zhi" width="384"/>
         </a>
       </td>
-  
+     <td>
+        <a href="">
+          <img src="./Arif.jpg" alt="Zhi" width="384"/>
+        </a>
+      </td>
 
 
   </tbody>
