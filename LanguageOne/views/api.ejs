@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>API Documentation</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='api.css'>
+  <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One" rel="stylesheet">
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/plugins/CSSPlugin.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/easing/EasePack.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenLite.min.js'></script>
+  <!-- BULMA -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+  <!-- FONT AWESOME -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
+  <script>
+  </script>
+
+
+</head>
+
+<style>
+  .container {
+    width: 100% !important;
+    height: 100% !important;
+    top: 0;
+
+
+  }
+
+  #text {
+    //Set to the bottom of the page
+    display: flex;
+    width: 100% !important;
+    position: fixed;
+    height: 3rem;
+    bottom: 6rem;
+    text-align: center;
+
+  }
+
+  .input {
+    //Set to the bottom of the page
+    display: flex;
+    width: 100% !important;
+    position: fixed;
+    height: 3rem;
+    bottom: 3rem;
+  }
+
+  #button {
+    //Set to the bottom of the page
+    display: flex;
+    width: 25% !important;
+    margin-top: 3rem;
+    position: fixed;
+    height: 3rem;
+    bottom: 0;
+  }
+
+  #detect {
+    //Set to the bottom of the page
+    display: flex;
+    width: 25% !important;
+    margin-top: 3rem;
+    left: 75%;
+    position: fixed;
+    height: 3rem;
+    bottom: 0;
+  }
+
+  #languageSelector {
+    //Set to the bottom of the page
+    display: flex;
+    width: 50% !important;
+    left: 25%;
+    margin-top: 3rem;
+    position: fixed;
+    height: 3rem;
+    bottom: 0rem;
+  }
+
+  #textarea {
+    //Set to the bottom of the page
+    display: flex;
+    width: 100% !important;
+    position: fixed;
+    top: 5rem;
+    font-size: 2.5rem;
+
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    color: black;
+    background-color: white;
+    text-align: center;
+    font-family: 'Rubik Mono One', sans-serif;
+
+  }
+
+  .row,
+  header {
+
+
+    margin-top: 0rem !important;
+    top: 5rem !important;
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: 'Rubik Mono One', sans-serif;
+    color: red !important;
+
+
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var textValue = document.getElementById("text");
+    var button = document.getElementById("button");
+
+
+
+    button.addEventListener("click", function() {
+      var text = document.getElementById("text");
+      // Clear the text
+      translateText();
+
+    });
+
+
+    const translateText = () => {
+      var textValue = document.getElementById("text").innerText;
+      var textarea = document.getElementById("textarea");
+      var url = "http://localhost:8080/API/translate";
+
+      //**FETCH THE RESPONSE FROM THE API */
+      fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer p@ssW0rd", //+ localStorage.getItem("token") ,
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+          },
+          body: JSON.stringify({
+            to: document.getElementById("languageSelector").value,
+            text: textValue
+          })
+
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          textarea.innerHTML = data[0].translations[0].text
+          var textInput = document.getElementById("input");
+          // Clear the text
+          textInput.innerText = "";
+          textInput.value = "";
+
+
+
+        })
+        .catch(error => {
+          alert("Error: " + error.message);
+          console.log(error);
+        });
+
+    }
+
+
+
+    /**
+     * Detect the language of the text
+     */
+    var detect = document.getElementById("detect");
+    detect.addEventListener("click", function() {
+      var textValue = document.getElementById("text").innerText;
+      var textarea = document.getElementById("textarea");
+      var url = "http://localhost:8080/API/detect";
+
+      //**FETCH THE RESPONSE FROM THE API */
+      fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer p@ssW0rd", //+ localStorage.getItem("token") ,
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+          },
+          body: JSON.stringify({
+            text: textValue
+          })
+
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+
+
+          textarea.innerHTML = ` <p> <span style="color:red">Language: </span>${data[0].language}  <span style="color:red">Confidence: </span> ${data[0].score} </p>`;
+
+
+
+          var textInput = document.getElementById("input");
+          // Clear the text
+          textInput.innerText = "";
+
+
+        })
+        .catch(error => {
+          alert("Error: " + error.message);
+          console.log(error);
+        });
+
+
+
+
+    });
+
+  });
+</script>
+
+<body>
+  <!-- HEADER-->
+
+  <header>
+    <h1>
+      <h1 class="text-center">Translation Playground</h1>
+      <div class="row">
+        <div class="small-centered small-10 medium-8 large-6 columns">
+          <div class="container">
+            <div class="dot blue"><span><span></span></span></div>
+            <div class="dot green"><span><span></span></span></div>
+            <div class="dot red"><span><span></span></span></div>
+            <div class="dot orange"><span><span></span></span></div>
+          </div>
+        </div>
+      </div>
+    </h1>
+  </header>
+
+  <!-- MAIN-->
+  <main>
+    <button class="button is-danger" id="button">Translate</button>
+    <button class="button is-warning" id="detect">Detect</button>
+
+    <div class="container">
+
+      <p id="offscreen-text" class="offscreen-text"></p>
+      <p id="text" class="text"></p>
+
+      <svg id="svg">
+      </svg>
+
+      <input type="text" class="input" id="input" required />
+      <script src="api.js"></script>
+
+  </main>
+  <select id="languageSelector" class="languageSelector">
+    <option value="en">English</option>
+    <option value="es">Spanish</option>
+    <option value="fr">French</option>
+    <option value="de">German</option>
+    <option value="it">Italian</option>
+    <option value="pt">Portuguese</option>
+    <option value="ru">Russian</option>
+    <option value="zh">Chinese</option>
+    <option value="ja">Japanese</option>
+    <option value="ko">Korean</option>
+    <option value="ar">Arabic</option>
+    <option value="hi">Hindi</option>
+    <option value="tr">Turkish</option>
+    <option value="vi">Vietnamese</option>
+    <option value="ar">Arabic</option>
+  </select>
+  <p id="textarea" disabled class="textarea is-focused control is-large is-loading" placeholder="Translating..."></p>
+
+
+
+
+  <!-- FOOTER-->
+  <footer>
+    <h1>
+
+    </h1>
+  </footer>
+</body>
+
+</html>
