@@ -120,10 +120,9 @@ node app.js #or pm2 start app.js
 
 
     
-  - [ ] [Enterprise API](http://api.findasnake.com/api-docs/)
+  - [ ] [Enterprise API](https://api.maskedwarrior.net/api-docs/)
 
-  - [ ] [Client Application](http://api.findasnake.com/)
-
+  - [ ] [Client Application](https://api.maskedwarrior.net/)
 ### Team Members
 
 ---
